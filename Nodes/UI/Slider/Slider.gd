@@ -1,13 +1,13 @@
 extends MarginContainer
 
-export var parameter := "cohesion"
-export var group := "boids"
-export(int) var initial_value: = 1
-export(int) var min_value: = 0
-export(int) var max_value: = 10
-export(float) var scale_by: = 1.0
+@export var parameter := "cohesion"
+@export var group := "boids"
+@export var initial_value: int = 1
+@export var min_value: int = 0
+@export var max_value: int = 10
+@export var scale_by: float = 1.0
 
-onready var _value: float = initial_value * scale_by
+@onready var _value: float = initial_value * scale_by
 
 
 func _ready() -> void:

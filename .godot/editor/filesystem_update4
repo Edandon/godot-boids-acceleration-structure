@@ -1,0 +1,5 @@
+res://default_env.tres
+res://Levels/RandomSpawn/RandomSpawn.tscn
+res://Actors/Crow/Crow.gd
+res://Nodes/UI/Slider/Slider.tscn
+res://Nodes/UI/ControlsUI/ControlsUI.tscn

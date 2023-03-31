@@ -2,12 +2,12 @@ extends Node2D
 
 const AccelStruct = preload("res://Nodes/AccelStruct/AccelStructure.gd")
 
-export(int) var starting_boids = 20
-export(PackedScene) var Boid 
-export(int) var compute_groups = 4
+@export var starting_boids: int = 20
+@export var Boid: PackedScene 
+@export var compute_groups: int = 4
 
-onready var screen_size: = get_viewport_rect().size
-onready var scaled_points = range(starting_boids)
+@onready var screen_size: = get_viewport_rect().size
+@onready var scaled_points = range(starting_boids)
 
 var accel_struct: AccelStruct
 var boids = []
@@ -30,13 +30,13 @@ func _process(delta):
 	process_boids(delta)
 
 func init_boids():
-	var initial_boid_values = $ControlsUI.get_current_values()
+	var initial_boid_values = $CanvasLayer/ControlsUI.get_current_values()
 	
 	# initialize the boids
 	for _i in starting_boids:
 		randomize()
-		var boid = Boid.instance()
-		var init_pos: = Vector2(rand_range(0, screen_size.x), rand_range(0, screen_size.y))
+		var boid = Boid.instantiate()
+		var init_pos: = Vector2(randf_range(0, screen_size.x), randf_range(0, screen_size.y))
 		boid.position = init_pos
 		boid.add_to_group("boids")
 		boid.set_values(initial_boid_values)
@@ -101,7 +101,7 @@ func reset_simulation():
 
 func _unhandled_input(event: InputEvent):
 	if event.is_action_released('toggle_controls'):
-		$ControlsUI.visible = not $ControlsUI.visible
+		$CanvasLayer/ControlsUI.visible = not $CanvasLayer/ControlsUI.visible
 	elif event.is_action_released('exit'):
 		get_tree().quit()
 	elif event.is_action_released('toggle_grid'):

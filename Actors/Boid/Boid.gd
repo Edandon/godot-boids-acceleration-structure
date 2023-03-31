@@ -1,17 +1,18 @@
 extends Node2D
+class_name Boid
 
-export(float) var max_speed: = 100.0
-export(float) var min_speed: = 80.0
-export(float) var target_force: = 2.0
-export(float) var cohesion: = 2.0
-export(float) var alignment: = 3.0
-export(float) var separation: = 5.0
-export(float) var view_distance: = 50.0
-export(float) var avoid_distance: = 15.0
-export(int) var max_flock_size: = 15
-export(float) var screen_avoid_force: = 10.0
+@export var max_speed: float = 100.0
+@export var min_speed: float = 80.0
+@export var target_force: float = 2.0
+@export var cohesion: float = 2.0
+@export var alignment: float = 3.0
+@export var separation: float = 5.0
+@export var view_distance: float = 50.0
+@export var avoid_distance: float = 15.0
+@export var max_flock_size: int = 15
+@export var screen_avoid_force: float = 10.0
 
-onready var screen_size = get_viewport_rect().size
+@onready var screen_size = Vector2(ProjectSettings.get_setting("display/window/size/viewport_width"),ProjectSettings.get_setting("display/window/size/viewport_height"))
 
 
 var _targets = []
@@ -25,7 +26,7 @@ var flock_size: int = 0
 
 func _ready():
 	randomize()
-	velocity = Vector2(rand_range(-1, 1), rand_range(-1, 1)).normalized() * max_speed
+	velocity = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * max_speed
 
 
 func process(delta):
@@ -54,9 +55,9 @@ func process(delta):
 		target_vector /= _targets.size()
 		acceleration += target_vector * target_force
 	
-	velocity = (velocity + acceleration).clamped(max_speed)
+	velocity = (velocity + acceleration).limit_length(max_speed)
 	if velocity.length() <= min_speed:
-		velocity = (velocity * min_speed).clamped(max_speed)
+		velocity = (velocity * min_speed).limit_length(max_speed)
 
 
 func get_flock_status():
@@ -99,7 +100,7 @@ func get_flock_status():
 
 func get_random_target():
 	randomize()
-	return Vector2(rand_range(0, screen_size.x), rand_range(0, screen_size.y))
+	return Vector2(randf_range(0, screen_size.x), randf_range(0, screen_size.y))
 
 
 func avoid_screen_edge():

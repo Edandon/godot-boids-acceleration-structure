@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Actors/Boid/Boid.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Actors/Bat/sprites/Bat_Sprite_Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Actors/Bat/sprites/Bat_Sprite_Sheet.png" type="Texture2D" id=2]
 
 [sub_resource type="AtlasTexture" id=1]
 flags = 4
@@ -41,7 +41,7 @@ animations = [ {
 [node name="Chicken" parent="." index="0"]
 visible = false
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="1"]
 position = Vector2( 0.0944672, -4.34553 )
 frames = SubResource( 6 )
 playing = true
